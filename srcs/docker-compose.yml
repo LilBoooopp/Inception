@@ -1,0 +1,92 @@
+version: '3'
+
+services:
+  mariadb:
+    container_name: mariadb
+    build:
+      context: .
+      dockerfile: requirements/mariadb/Dockerfile
+    image: mariadb
+    pull_policy: never
+    env_file:
+      - .env
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
+    secrets:
+      - db_password
+      - db_root_password
+    environment:
+      - SQL_DATABASE=wordpress
+      - SQL_USER=user
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: .
+      dockerfile: requirements/wordpress/Dockerfile
+    image: wordpress
+    pull_policy: never
+    env_file:
+      - .env
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    restart: always
+    secrets:
+      - db_password
+      - wp_admin_password
+    environment:
+      - SQL_DATABASE=wordpress
+      - SQL_USER=user
+      - SQL_HOST=mariadb:3306
+
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: requirements/nginx/Dockerfile
+    image: nginx
+    pull_policy: never
+    env_file:
+      - .env
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    restart: always
+
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  wp_admin_password:
+    file: ../secrets/wp_admin_password.txt
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/cbopp/data/wordpress
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/cbopp/data/mariadb
+
+networks:
+  inception:
+    driver: bridge

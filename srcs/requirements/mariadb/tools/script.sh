@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SQL_PASSWORD=$(cat /run/secrets/db_password)
+SQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
+
 if [ ! -d "/var/liv/mysql/${SQL_DATABASE}" ]; then
   echo "Database not found. Initializing..."
 
