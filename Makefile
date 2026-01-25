@@ -5,12 +5,26 @@ LOGIN = cbopp
 WORDPRESS_DATA = /home/$(LOGIN)/data/wordpress
 MARIADB_DATA = /home/$(LOGIN)/data/mariadb
 
+COMPOSE_CMD = docker-compose -f ./srcs/docker-compose.yml --env-file srcs/.env
+
 all:
 	@printf "Launch configuration ${name}...\n"
 	@mkdir -p $(WORDPRESS_DATA)
 	@mkdir -p $(MARIADB_DATA)
 
-	@docker-compose -f ./srcs/docker-compose.yml --env-file srcs/.env up -d --build
+	@$(COMPOSE_CMD) up -d --build
+
+nginx:
+	@printf "Rebuilding NGINX container...\n"
+	@$(COMPOSE_CMD) up -d --build nginx
+	
+wordpress:
+	@printf "Rebuilding WordPress only...\n"
+	@$(COMPOSE_CMD) up -d --build wordpress
+
+mariadb:
+	@printf "Rebuilding Mariadb only...\n"
+	@$(COMPOSE_CMD) up -d --build mariadb
 
 down:
 	@printf "Stopping configuration ${name}...\n"
@@ -34,4 +48,4 @@ fclean: clean
 	@mkdir -p $(WORDPRESS_DATA)
 	@mkdir -p $(MARIADB_DATA)
 
-.PHONY: all down re clean fclean
+.PHONY: all down re clean fclean nginx wordpress mariadb
