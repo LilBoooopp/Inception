@@ -4,8 +4,8 @@ services:
   mariadb:
     container_name: mariadb
     build:
-      context: .
-      dockerfile: requirements/mariadb/Dockerfile
+      context: ./requirements/mariadb/
+      dockerfile: Dockerfile
     image: mariadb
     pull_policy: never
     env_file:
@@ -25,8 +25,8 @@ services:
   wordpress:
     container_name: wordpress
     build:
-      context: .
-      dockerfile: requirements/wordpress/Dockerfile
+      context: ./requirements/wordpress/
+      dockerfile: Dockerfile
     image: wordpress
     pull_policy: never
     env_file:
@@ -49,8 +49,8 @@ services:
   nginx:
     container_name: nginx
     build:
-      context: .
-      dockerfile: requirements/nginx/Dockerfile
+      context: ./requirements/nginx/
+      dockerfile: Dockerfile
     image: nginx
     pull_policy: never
     env_file:
