@@ -1,3 +1,2 @@
-srcs/.env
 secrets/*
 !secrets/.keep
