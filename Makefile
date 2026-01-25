@@ -13,7 +13,7 @@ all:
 	@docker-compose -f ./srcs/docker-compose.yml --env-file srcs/.env up -d --build
 
 down:
-	@prinf "Stopping configuration ${name}...\n"
+	@printf "Stopping configuration ${name}...\n"
 	@docker-compose -f ./srcs/docker-compose.yml --env-file srcs/.env down
 
 clean: down
@@ -34,4 +34,4 @@ fclean: clean
 	@mkdir -p $(WORDPRESS_DATA)
 	@mkdir -p $(MARIADB_DATA)
 
-.PHONY all down re clean fclean
+.PHONY: all down re clean fclean
