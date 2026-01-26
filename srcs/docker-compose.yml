@@ -18,9 +18,6 @@ services:
     secrets:
       - db_password
       - db_root_password
-    environment:
-      - SQL_DATABASE=wordpress
-      - SQL_USER=user
 
   wordpress:
     container_name: wordpress
@@ -41,10 +38,6 @@ services:
     secrets:
       - db_password
       - wp_admin_password
-    environment:
-      - SQL_DATABASE=wordpress
-      - SQL_USER=user
-      - SQL_HOST=mariadb:3306
 
   nginx:
     container_name: nginx
