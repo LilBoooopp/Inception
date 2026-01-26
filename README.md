@@ -25,10 +25,14 @@ All data for the database and WordPress files is persistent via Docker Volumes s
 To access the site via `cbopp.42.fr` instead of `localhost`, you must modify your hosts file.
 
 # Open the hosts file
+```bash
 sudo vim /etc/hosts
+```
 
 # Add the following line
+```
 127.0.0.1   cbopp.42.fr
+```
 
 ### 2. Clone the Repository
 git clone <repository_url> inception
@@ -36,13 +40,17 @@ cd inception
 
 ### 3. Setup Environment Variables
 Create a `.env` file in the `srcs/` directory.
+```
 touch srcs/.env
+```
 
 Copy the keys from the **Configuration** section below and fill in your secrets.
 
 ### 4. Build and Run
 Use the Makefile to build the images and start the containers.
+```
 make
+```
 
 * First launch will take a few minutes to build the images and install WordPress.
 * The WordPress installer waits for MariaDB to be ready before configuring the site.
@@ -55,6 +63,7 @@ Open your browser and navigate to:
 
 Define the following keys in `srcs/.env`. **Do not commit your actual passwords to Git.**
 
+```
 DOMAIN_NAME=
 
 # --- MySQL / MariaDB Setup ---
@@ -78,6 +87,7 @@ WP_ADMIN_PASSWORD=
 WP_USER=
 WP_EMAIL=
 WP_PASSWORD=
+```
 
 ## 🎮 Usage Commands
 
@@ -96,6 +106,7 @@ The project includes a `Makefile` to simplify management:
 
 ## 📁 Directory Structure
 
+```
 inception/
 ├── Makefile
 └── srcs/
@@ -113,3 +124,4 @@ inception/
             ├── Dockerfile
             ├── conf/
             └── tools/      <-- WP-CLI Setup script
+```
