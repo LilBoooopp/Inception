@@ -65,6 +65,16 @@ services:
       - wordpress
     restart: always
 
+  redis:
+    container_name: redis
+    build:
+      context: ./requirements/bonus/redis/
+      dockerfile: Dockerfile
+    image: redis
+    networks:
+      - inception
+    restart: always
+
 secrets:
   db_password:
     file: ../secrets/db_password.txt
