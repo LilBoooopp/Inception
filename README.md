@@ -72,10 +72,6 @@ SQL_DATABASE=
 SQL_USER=
 MYSQL_USER=
 
-# Secrets (REQUIRED for scripts to work)
-SQL_PASSWORD=
-SQL_ROOT_PASSWORD=
-
 # --- WordPress Install Config ---
 WP_URL=
 WP_TITLE=
@@ -87,6 +83,13 @@ WP_ADMIN_PASSWORD=
 WP_USER=
 WP_EMAIL=
 WP_PASSWORD=
+```
+
+## Secrets
+
+Define the important passwords in the following files:
+```bash
+touch secrets/db_password.txt secrets/db_root_password.txt secrets/wp_admin_password.txt
 ```
 
 ## 🎮 Usage Commands
