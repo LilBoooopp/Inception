@@ -6,9 +6,17 @@ This project involves broadening knowledge of system administration by using Doc
 
 The infrastructure consists of three separate containers connected via a custom Docker network:
 
+### Mandatory Stack
 * **NGINX:** The entry point. It handles HTTPS (TLSv1.2/1.3) and forwards PHP requests to the WordPress container.
 * **WordPress:** The application container running PHP-FPM. It contains the WP-CLI scripts to auto-install the site.
 * **MariaDB:** The database container. It stores the WordPress data and is isolated from the outside world (no public ports).
+
+### Bonus Stack
+* **Redis:** In-memory cache configured to speed up WordPress database queries.
+* **FTP Server (vsftpd):** Provides direct file access to the WordPress volume.
+* **Adminer:** A lightweight web-based database management tool (SQL GUI).
+* **Portainer:** A visual dashboard to monitor and manage Docker containers.
+* **Static Website:** A dedicated container serving a simple static HTML page.
 
 All data for the database and WordPress files is persistent via Docker Volumes stored on the host machine.
 
@@ -55,9 +63,16 @@ make
 * First launch will take a few minutes to build the images and install WordPress.
 * The WordPress installer waits for MariaDB to be ready before configuring the site.
 
-### 5. Access the Site
+### 5. Access the Services
 Open your browser and navigate to:
-* **https://cbopp.42.fr** (Accept the self-signed certificate warning)
+| Service | URL/Access | Description |
+| :--- | :--- | :---|
+| Wordpress | https://cbopp.42.fr | Main website |
+| Adminer | https://cbopp.42.fr/adminer | Database GUI (User: user, Server: mariadb) |
+| Static site | https://cbopp.42.fr/static | Static HTML page |
+| Portainer | https://cbopp.42.fr:9443/ | Docker Management Dashboard |
+| FTP | IP: `cbopp.42.fr` Port: `21` | File Transfer |
+
 
 ## ⚙️ Configuration (.env)
 
@@ -91,7 +106,7 @@ FTP_USER=
 
 Define the important passwords in the following files:
 ```bash
-touch secrets/db_password.txt secrets/db_root_password.txt secrets/wp_admin_password.txt
+touch secrets/db_password.txt secrets/db_root_password.txt secrets/wp_admin_password.txt secrets/ftp_password.txt
 ```
 
 ## 🎮 Usage Commands
@@ -108,6 +123,11 @@ The project includes a `Makefile` to simplify management:
 | `make nginx` | Rebuilds only the NGINX container. |
 | `make wordpress` | Rebuilds only the WordPress container. |
 | `make mariadb` | Rebuilds only the MariaDB container. |
+| `make redis` | Rebuilds only the Redis container. |
+| `make adminer` | Rebuilds only the Adminer container. |
+| `make portainer` | Rebuilds only the Portainer container. |
+| `make website` | Rebuilds only the static site container. |
+| `make ftp` | Rebuilds only the FTP container. |
 
 ## 📁 Directory Structure
 
@@ -121,12 +141,18 @@ inception/
         ├── mariadb/
         │   ├── Dockerfile
         │   ├── conf/
-        │   └── tools/      <-- Initialization script
+        │   └── tools/
         ├── nginx/
         │   ├── Dockerfile
-        │   └── conf/       <-- SSL & Config
-        └── wordpress/
-            ├── Dockerfile
-            ├── conf/
-            └── tools/      <-- WP-CLI Setup script
+        │   └── conf/
+        ├── wordpress/
+        │   ├── Dockerfile
+        │   ├── conf/
+        │   └── tools/
+        └── bonus/
+            ├── adminer/
+            ├── ftp/
+            ├── portainer/
+            ├── redis/
+            └── website/
 ```
