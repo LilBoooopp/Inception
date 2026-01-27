@@ -10,4 +10,6 @@ echo "$FTP_USER" | tee -a /etc/vsftpd.userlist
 mkdir -p /var/www/wordpress
 chown -R $FTP_USER:$FTP_USER /var/www/wordpress
 
+mkdir -p /var/run/vsftpd/empty
+
 exec /usr/sbin/vsftpd /etc/vsftpd.conf
