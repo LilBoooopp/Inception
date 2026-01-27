@@ -42,6 +42,10 @@ website:
 	@printf "Rebuilding website only...\n"
 	@$(COMPOSE_CMD) up -d --build website
 
+ftp:
+	@printf "Rebuilding ftp only...\n"
+	@$(COMPOSE_CMD) up -d --build ftp
+
 down:
 	@printf "Stopping configuration ${name}...\n"
 	@docker-compose -f ./srcs/docker-compose.yml --env-file srcs/.env down
