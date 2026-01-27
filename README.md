@@ -91,7 +91,6 @@ WP_URL=cbopp.42.fr
 WP_TITLE=
 WP_ADMIN_USER=
 WP_ADMIN_EMAIL=
-WP_ADMIN_PASSWORD=
 
 # --- WordPress Secondary User ---
 WP_USER=
