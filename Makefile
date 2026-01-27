@@ -26,6 +26,26 @@ mariadb:
 	@printf "Rebuilding Mariadb only...\n"
 	@$(COMPOSE_CMD) up -d --build mariadb
 
+redis:
+	@printf "Rebuilding Redis only...\n"
+	@$(COMPOSE_CMD) up -d --build redis
+
+adminer:
+	@printf "Rebuilding adminer only...\n"
+	@$(COMPOSE_CMD) up -d --build adminer
+
+portainer:
+	@printf "Rebuilding portainer only...\n"
+	@$(COMPOSE_CMD) up -d --build portainer
+
+website:
+	@printf "Rebuilding website only...\n"
+	@$(COMPOSE_CMD) up -d --build website
+
+ftp:
+	@printf "Rebuilding ftp only...\n"
+	@$(COMPOSE_CMD) up -d --build ftp
+
 down:
 	@printf "Stopping configuration ${name}...\n"
 	@docker-compose -f ./srcs/docker-compose.yml --env-file srcs/.env down

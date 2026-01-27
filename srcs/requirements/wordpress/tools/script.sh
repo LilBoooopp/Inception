@@ -33,6 +33,16 @@ if [ ! -f wp-config.php ]; then
                   --admin_email=$WP_ADMIN_EMAIL \
                   --path='/var/www/wordpress'
 
+  #instlal redis
+  wp plugin install redis-cache --activate --allow-root --path=/var/www/wordpress
+  wp plugin update --all --allow-root --path=/var/www/wordpress
+
+  #configure Redis Host (Point to the 'redis' service name)
+  wp config set WP_REDIS_HOST redis --allow-root --path=/var/www/wordpress
+  wp config set WP_REDIS_PORT 6379 --allow-root --path=/var/www/wordpress
+
+  wp redis enable --allow-root --path=/var/www/wordpress
+
   # create user
   wp user create  --allow-root \
                   $WP_USER $WP_EMAIL \
