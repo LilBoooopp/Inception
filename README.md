@@ -97,9 +97,9 @@ The project includes a `Makefile` to simplify management:
 
 | Command | Description |
 | :--- | :--- |
-| `make` | Build images, create volumes, and start the cluster in the background. |
-| `make down` | Stop and remove the containers and networks. |
-| `make clean` | Stop containers and remove docker images/networks (keeps data). |
+| `make` | Builds images, create volumes, and start the cluster in the background. |
+| `make down` | Stops and removes the containers and networks. |
+| `make clean` | Stops containers and removes docker images/networks (keeps data). |
 | `make fclean` | **Nuclear Option:** Stops everything, removes images, **deletes all database/site data** on the host. |
 | `make re` | Rebuilds everything from scratch (fclean + all). |
 | `make nginx` | Rebuilds only the NGINX container. |
