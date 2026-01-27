@@ -1,5 +1,7 @@
 #!/bin/bash
 
+FTP_PASSWORD=$(cat /run/secrets/ftp_password)
+
 adduser --disabled-password --gecos "" $FTP_USER
 echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
 
