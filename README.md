@@ -64,16 +64,15 @@ Open your browser and navigate to:
 Define the following keys in `srcs/.env`. **Do not commit your actual passwords to Git.**
 
 ```
-DOMAIN_NAME=
+DOMAIN_NAME=cbopp.42.fr
 
 # --- MySQL / MariaDB Setup ---
-SQL_HOST=
-SQL_DATABASE=
+SQL_HOST=mariadb:3306
+SQL_DATABASE=wordpress
 SQL_USER=
-MYSQL_USER=
 
 # --- WordPress Install Config ---
-WP_URL=
+WP_URL=cbopp.42.fr
 WP_TITLE=
 WP_ADMIN_USER=
 WP_ADMIN_EMAIL=
