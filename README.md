@@ -82,6 +82,9 @@ WP_ADMIN_PASSWORD=
 WP_USER=
 WP_EMAIL=
 WP_PASSWORD=
+
+# --- FTP User ---
+FTP_USER=
 ```
 
 ## Secrets
