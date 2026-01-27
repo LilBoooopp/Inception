@@ -75,6 +75,40 @@ services:
       - inception
     restart: always
 
+  adminer:
+    image: adminer
+    build:
+      context: ./requirements/bonus/adminer/
+      dockerfile: Dockerfile
+    container_name: adminer
+    networks:
+      - inception
+    restart: always
+
+  website:
+    image: website
+    build:
+      context: ./requirements/bonus/website/
+      dockerfile: Dockerfile
+    container_name: website
+    networks:
+      - inception
+    restart: always
+
+  portainer:
+    image: portainer
+    build:
+      context: ./requirements/bonus/portainer/
+      dockerfile: Dockerfile
+    container_name: portainer
+    ports:
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - inception
+    restart: always
+
 secrets:
   db_password:
     file: ../secrets/db_password.txt
